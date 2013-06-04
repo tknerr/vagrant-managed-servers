@@ -1,5 +1,5 @@
 module VagrantPlugins
   module Hosted
-    VERSION = "0.3.0.dev"
+    VERSION = "0.1.0.dev"
   end
 end
