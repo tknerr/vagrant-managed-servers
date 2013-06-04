@@ -6,8 +6,9 @@ Since you don't control the lifecylce:
  * `up`, `halt`, `destroy`, `suspend` and `resume` are no-ops in this provider
  * `ssh`, `provision` and `reload` work as expected 
 
+This provider is largely based on the [vagrant-aws](https://github.com/tknerr/vagrant-hosted) provider and AWS-specific functionality stripped out.
 
-**NOTE:** This plugin requires Vagrant 1.2+,
+**NOTE:** This plugin requires Vagrant 1.2+
 
 ## Features
 
