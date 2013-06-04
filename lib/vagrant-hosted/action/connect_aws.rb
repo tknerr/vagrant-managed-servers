@@ -2,7 +2,7 @@ require "fog"
 require "log4r"
 
 module VagrantPlugins
-  module AWS
+  module Hosted
     module Action
       # This action connects to AWS, verifies credentials work, and
       # puts the AWS connection object into the `:aws_compute` key

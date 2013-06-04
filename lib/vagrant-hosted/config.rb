@@ -1,7 +1,7 @@
 require "vagrant"
 
 module VagrantPlugins
-  module AWS
+  module Hosted
     class Config < Vagrant.plugin("2", :config)
       # The access key ID for accessing AWS.
       #

@@ -2,7 +2,7 @@ require "log4r"
 require "vagrant"
 
 module VagrantPlugins
-  module AWS
+  module Hosted
     class Provider < Vagrant.plugin("2", :provider)
       def initialize(machine)
         @machine = machine

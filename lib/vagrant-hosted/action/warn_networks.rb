@@ -1,13 +1,16 @@
 module VagrantPlugins
-  module AWS
+  module Hosted
     module Action
-      class MessageWillNotDestroy
+      class WarnNetworks
         def initialize(app, env)
           @app = app
         end
 
         def call(env)
-          env[:ui].info(I18n.t("vagrant_aws.will_not_destroy", name: env[:machine].name))
+          if env[:machine].config.vm.networks.length > 0
+            env[:ui].warn(I18n.t("vagrant_aws.warn_networks"))
+          end
+
           @app.call(env)
         end
       end

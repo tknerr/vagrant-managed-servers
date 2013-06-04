@@ -1,7 +1,7 @@
 require "vagrant"
 
 module VagrantPlugins
-  module AWS
+  module Hosted
     module Errors
       class VagrantAWSError < Vagrant::Errors::VagrantError
         error_namespace("vagrant_aws.errors")

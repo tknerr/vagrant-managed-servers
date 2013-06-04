@@ -1,13 +1,13 @@
 module VagrantPlugins
-  module AWS
+  module Hosted
     module Action
-      class MessageAlreadyCreated
+      class MessageNotCreated
         def initialize(app, env)
           @app = app
         end
 
         def call(env)
-          env[:ui].info(I18n.t("vagrant_aws.already_created"))
+          env[:ui].info(I18n.t("vagrant_aws.not_created"))
           @app.call(env)
         end
       end
