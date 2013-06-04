@@ -1,6 +1,6 @@
-require "vagrant-aws/config"
+require "vagrant-hosted/config"
 
-describe VagrantPlugins::AWS::Config do
+describe VagrantPlugins::Hosted::Config do
   let(:instance) { described_class.new }
 
   # Ensure tests are not affected by AWS credential environment variables
