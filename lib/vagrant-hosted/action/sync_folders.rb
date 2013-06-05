@@ -16,7 +16,7 @@ module VagrantPlugins
 
         def initialize(app, env)
           @app    = app
-          @logger = Log4r::Logger.new("vagrant_aws::action::sync_folders")
+          @logger = Log4r::Logger.new("vagrant_hosted::action::sync_folders")
         end
 
         def call(env)
@@ -31,7 +31,7 @@ module VagrantPlugins
             next if data[:disabled]
 
             unless Vagrant::Util::Which.which('rsync')
-              env[:ui].warn(I18n.t('vagrant_aws.rsync_not_found_warning'))
+              env[:ui].warn(I18n.t('vagrant_hosted.rsync_not_found_warning'))
               break
             end
 
@@ -47,7 +47,7 @@ module VagrantPlugins
               hostpath = hostpath.gsub(/^(\w):/) { "/cygdrive/#{$1}" }
             end
 
-            env[:ui].info(I18n.t("vagrant_aws.rsync_folder",
+            env[:ui].info(I18n.t("vagrant_hosted.rsync_folder",
                                 :hostpath => hostpath,
                                 :guestpath => guestpath))
 

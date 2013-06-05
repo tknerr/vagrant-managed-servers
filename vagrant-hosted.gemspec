@@ -3,7 +3,7 @@ require "vagrant-hosted/version"
 
 Gem::Specification.new do |s|
   s.name          = "vagrant-hosted"
-  s.version       = VagrantPlugins::hosted::VERSION
+  s.version       = VagrantPlugins::Hosted::VERSION
   s.platform      = Gem::Platform::RUBY
   s.authors       = "Torben Knerr"
   s.email         = "mail@tknerr.de"

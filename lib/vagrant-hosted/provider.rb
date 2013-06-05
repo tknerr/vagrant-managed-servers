@@ -17,14 +17,6 @@ module VagrantPlugins
         nil
       end
 
-      def ssh_info
-        # Run a custom action called "read_ssh_info" which does what it
-        # says and puts the resulting SSH info into the `:machine_ssh_info`
-        # key in the environment.
-        env = @machine.action("read_ssh_info")
-        env[:machine_ssh_info]
-      end
-
       def state
         # Run a custom action we define called "read_state" which does
         # what it says. It puts the state in the `:machine_state_id`
@@ -34,8 +26,8 @@ module VagrantPlugins
         state_id = env[:machine_state_id]
 
         # Get the short and long description
-        short = I18n.t("vagrant_aws.states.short_#{state_id}")
-        long  = I18n.t("vagrant_aws.states.long_#{state_id}")
+        short = I18n.t("vagrant_hosted.states.short_#{state_id}")
+        long  = I18n.t("vagrant_hosted.states.long_#{state_id}")
 
         # Return the MachineState object
         Vagrant::MachineState.new(state_id, short, long)
@@ -43,7 +35,7 @@ module VagrantPlugins
 
       def to_s
         id = @machine.id.nil? ? "new" : @machine.id
-        "AWS (#{id})"
+        "Hosted (#{id})"
       end
     end
   end

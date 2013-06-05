@@ -3,19 +3,15 @@ require "vagrant"
 module VagrantPlugins
   module Hosted
     module Errors
-      class VagrantAWSError < Vagrant::Errors::VagrantError
-        error_namespace("vagrant_aws.errors")
+      class VagrantHostedError < Vagrant::Errors::VagrantError
+        error_namespace("vagrant_hosted.errors")
       end
 
-      class FogError < VagrantAWSError
-        error_key(:fog_error)
+      class HostedServerNotReachable < VagrantHostedError
+        error_key(:server_not_reachable)
       end
 
-      class InstanceReadyTimeout < VagrantAWSError
-        error_key(:instance_ready_timeout)
-      end
-
-      class RsyncError < VagrantAWSError
+      class RsyncError < VagrantHostedError
         error_key(:rsync_error)
       end
     end
