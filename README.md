@@ -3,10 +3,11 @@
 This is a [Vagrant](http://www.vagrantup.com) 1.2+ plugin that adds a provider for "managed servers" to Vagrant, i.e. servers for which you have SSH access but no control over their lifecycle.
 
 Since you don't control the lifecylce:
- * `up`, `halt`, `destroy`, `suspend` and `resume` are no-ops in this provider
- * `ssh`, `provision` and `reload` work as expected 
+ * `up` and `destroy` are re-interpreted for "linking" / "unlinking" vagrant with a managed server
+ * once "linked", the `ssh` and `provision` commands work as expected 
+ * `halt`, `destroy`, `reload` and `suspend` and `resume` are no-ops in this provider
 
-This provider is largely based on the [vagrant-aws](https://github.com/tknerr/vagrant-managed-servers) provider and AWS-specific functionality stripped out.
+Credits: this provider was initially based on the [vagrant-aws](https://github.com/mitchellh/vagrant-aws) provider and AWS-specific functionality stripped out.
 
 **NOTE:** This plugin requires Vagrant 1.2+
 
@@ -24,6 +25,7 @@ Install using standard Vagrant 1.1+ plugin installation methods. After installin
 $ vagrant plugin install vagrant-managed-servers
 ...
 $ vagrant up --provider=managed
+$ vagrant provision
 ...
 ```
 
@@ -52,11 +54,13 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-Then run `vagrant ssh --provider=managed` ssh into the managed server.
+Then run `vagrant up --provider=managed` to "link" vagrant with the managed server. 
 
-Similarly you can run `vagrant provision --provider=managed` to provision that server with any of the available vagrant provisioners. 
+Once linked, you can run `vagrant ssh` to ssh into the managed server or `vagrant provision` to provision that server with any of the available vagrant provisioners. 
 
-If you try any of the VM lifecycle commands like `up`, `destroy`, etc... you will get a warning that these commands are not supported with the vagrant-managed-servers provider. 
+If you are done, you can "unlink" vagrant from the managed server by running `vagrant destroy`.
+
+If you try any of the other VM lifecycle commands like `halt`, `resume`, `reload`, etc... you will get a warning that these commands are not supported with the vagrant-managed-servers provider. 
 
 ## Box Format
 
@@ -128,6 +132,11 @@ $ bundle exec vagrant up fake_managed_server
 Now you can use the managed provider (defined in a separate VM named `my_server`) to ssh into or provision the (fake) managed server:
 
 ```
-$ bundle exec vagrant ssh my_server --provider=managed
-$ bundle exec vagrant provision my_server --provider=managed
+$ # link vagrant with the server
+$ bundle exec vagrant up my_server --provider=managed
+$ # ssh / provision
+$ bundle exec vagrant ssh my_server
+$ bundle exec vagrant provision my_server
+$ # unlink
+$ bundle exec vagrant destroy my_server
 ```
