@@ -1,29 +1,29 @@
 begin
   require "vagrant"
 rescue LoadError
-  raise "The Vagrant Hosted plugin must be run within Vagrant."
+  raise "The Vagrant ManagedServers plugin must be run within Vagrant."
 end
 
 # This is a sanity check to make sure no one is attempting to install
 # this into an early Vagrant version.
 if Vagrant::VERSION < "1.2.0"
-  raise "The Vagrant Hosted plugin is only compatible with Vagrant 1.2+"
+  raise "The Vagrant ManagedServers plugin is only compatible with Vagrant 1.2+"
 end
 
 module VagrantPlugins
-  module Hosted
+  module ManagedServers
     class Plugin < Vagrant.plugin("2")
-      name "Hosted"
+      name "ManagedServers"
       description <<-DESC
-      This plugin installs a provider that allows Vagrant to interact with managed hosts.
+      This plugin installs a provider that allows Vagrant to interact with managed servers.
       DESC
 
-      config(:hosted, :provider) do
+      config(:managed, :provider) do
         require_relative "config"
         Config
       end
 
-      provider(:hosted, parallel: true) do
+      provider(:managed, parallel: true) do
         # Setup logging and i18n
         setup_logging
         setup_i18n
@@ -35,7 +35,7 @@ module VagrantPlugins
 
       # This initializes the internationalization strings.
       def self.setup_i18n
-        I18n.load_path << File.expand_path("locales/en.yml", Hosted.source_root)
+        I18n.load_path << File.expand_path("locales/en.yml", ManagedServers.source_root)
         I18n.reload!
       end
 
@@ -61,7 +61,7 @@ module VagrantPlugins
         # Set the logging level on all "vagrant" namespaced
         # logs as long as we have a valid level.
         if level
-          logger = Log4r::Logger.new("vagrant_hosted")
+          logger = Log4r::Logger.new("vagrant_managed_servers")
           logger.outputters = Log4r::Outputter.stderr
           logger.level = level
           logger = nil

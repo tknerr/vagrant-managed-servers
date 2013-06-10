@@ -1,14 +1,14 @@
 require "log4r"
 
 module VagrantPlugins
-  module Hosted
+  module ManagedServers
     module Action
       # This action reads the state of the machine and puts it in the
       # `:machine_state_id` key in the environment.
       class ReadState
         def initialize(app, env)
           @app    = app
-          @logger = Log4r::Logger.new("vagrant_hosted::action::read_state")
+          @logger = Log4r::Logger.new("vagrant_managed_servers::action::read_state")
         end
 
         def call(env)

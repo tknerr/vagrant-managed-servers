@@ -1,10 +1,10 @@
 require "vagrant"
 
 module VagrantPlugins
-  module Hosted
+  module ManagedServers
     class Config < Vagrant.plugin("2", :config)
       
-      # The IP address or hostname of the hosted server.
+      # The IP address or hostname of the managed server.
       #
       # @return [String]
       attr_accessor :server
@@ -20,8 +20,8 @@ module VagrantPlugins
 
       def validate(machine)
         errors = _detected_errors
-        errors << I18n.t("vagrant_hosted.config.server_required") if @server.nil?
-        { "Hosted Provider" => errors }
+        errors << I18n.t("vagrant_managed_servers.config.server_required") if @server.nil?
+        { "ManagedServers Provider" => errors }
       end
     end
   end

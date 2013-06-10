@@ -1,18 +1,18 @@
 $:.unshift File.expand_path("../lib", __FILE__)
-require "vagrant-hosted/version"
+require "vagrant-managed-servers/version"
 
 Gem::Specification.new do |s|
-  s.name          = "vagrant-hosted"
-  s.version       = VagrantPlugins::Hosted::VERSION
+  s.name          = "vagrant-managed-servers"
+  s.version       = VagrantPlugins::ManagedServers::VERSION
   s.platform      = Gem::Platform::RUBY
   s.authors       = "Torben Knerr"
   s.email         = "mail@tknerr.de"
-  s.homepage      = "https://github.com/tknerr/vagrant-hosted"
-  s.summary       = "Enables Vagrant to ssh into and provision managed hosts."
-  s.description   = "Enables Vagrant to ssh into and provision managed hosts."
+  s.homepage      = "https://github.com/tknerr/vagrant-managed-servers"
+  s.summary       = "Enables Vagrant to ssh into and provision managed servers."
+  s.description   = "Enables Vagrant to ssh into and provision managed servers."
 
   s.required_rubygems_version = ">= 1.3.6"
-  s.rubyforge_project         = "vagrant-hosted"
+  s.rubyforge_project         = "vagrant-managed-servers"
 
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec-core", "~> 2.12.2"

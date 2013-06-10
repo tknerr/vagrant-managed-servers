@@ -1,10 +1,10 @@
 require "pathname"
 
-require "vagrant-hosted/plugin"
+require "vagrant-managed-servers/plugin"
 
 module VagrantPlugins
-  module Hosted
-    lib_path = Pathname.new(File.expand_path("../vagrant-hosted", __FILE__))
+  module ManagedServers
+    lib_path = Pathname.new(File.expand_path("../vagrant-managed-servers", __FILE__))
     autoload :Action, lib_path.join("action")
     autoload :Errors, lib_path.join("errors")
 

@@ -2,7 +2,7 @@ require "log4r"
 require "vagrant"
 
 module VagrantPlugins
-  module Hosted
+  module ManagedServers
     class Provider < Vagrant.plugin("2", :provider)
       def initialize(machine)
         @machine = machine
@@ -17,7 +17,7 @@ module VagrantPlugins
         nil
       end
 
-      # Returns the SSH info for accessing the hosted server.
+      # Returns the SSH info for accessing the managed server.
       def ssh_info
         return {
           :host => @machine.provider_config.server,
@@ -35,8 +35,8 @@ module VagrantPlugins
         state_id = env[:machine_state_id]
 
         # Get the short and long description
-        short = I18n.t("vagrant_hosted.states.short_#{state_id}")
-        long  = I18n.t("vagrant_hosted.states.long_#{state_id}")
+        short = I18n.t("vagrant_managed_servers.states.short_#{state_id}")
+        long  = I18n.t("vagrant_managed_servers.states.long_#{state_id}")
 
         # Return the MachineState object
         Vagrant::MachineState.new(state_id, short, long)
@@ -44,7 +44,7 @@ module VagrantPlugins
 
       def to_s
         id = @machine.id.nil? ? "n/a" : @machine.id
-        "Hosted (#{id})"
+        "ManagedServers (#{id})"
       end
     end
   end
