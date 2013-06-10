@@ -11,15 +11,19 @@ en:
       Make sure rsync is installed and the binary can be found in the PATH.
     rsync_folder: |-
       Rsyncing folder: %{hostpath} => %{guestpath}
+    linking_server: |-
+      Linking vagrant with managed server %{host}
+    unlinking_server: |-
+      Unlinking vagrant from managed server %{host}
     states:
       short_not_reachable: |-
         not reachable
       long_not_reachable: |-
         The hosted server is not reachable. Check if the `config.hosted.server` is correct.
-      short_reachable: |-
-        reachable
-      long_reachable: |-
-        The hosted server is reachable. To ssh into this machine, you can run
+      short_running: |-
+        running
+      long_running: |-
+        The hosted server is running. To ssh into this machine, you can run
         `vagrant ssh`. To provision the machine, you can run `vagrant provision`.
     config:
       server_required: |-

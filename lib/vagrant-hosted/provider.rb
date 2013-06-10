@@ -17,7 +17,16 @@ module VagrantPlugins
         nil
       end
 
+      # Returns the SSH info for accessing the hosted server.
+      def ssh_info
+        return {
+          :host => @machine.provider_config.server,
+          :port => 22
+        }
+      end
+
       def state
+
         # Run a custom action we define called "read_state" which does
         # what it says. It puts the state in the `:machine_state_id`
         # key in the environment.
@@ -34,7 +43,7 @@ module VagrantPlugins
       end
 
       def to_s
-        id = @machine.id.nil? ? "new" : @machine.id
+        id = @machine.id.nil? ? "n/a" : @machine.id
         "Hosted (#{id})"
       end
     end

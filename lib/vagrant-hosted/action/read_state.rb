@@ -8,37 +8,75 @@ module VagrantPlugins
       class ReadState
         def initialize(app, env)
           @app    = app
-          @logger = Log4r::Logger.new("vagrant_aws::action::read_state")
+          @logger = Log4r::Logger.new("vagrant_hosted::action::read_state")
         end
 
         def call(env)
           env[:machine_state_id] = read_state(env[:machine])
-
           @app.call(env)
         end
 
         def read_state(machine)
-
-          # TODO: this must be properly implemented
-
-          return :not_reachable
-
-          # XXX: or should this be :running?
-          return :reachable
-
           return :not_created if machine.id.nil?
 
-          # Find the machine
-          server = aws.servers.get(machine.id)
-          if server.nil? || [:"shutting-down", :terminated].include?(server.state.to_sym)
-            # The machine can't be found
-            @logger.info("Machine not found or terminated, assuming it got destroyed.")
-            machine.id = nil
-            return :not_created
+          ip_address = machine.id
+=begin
+          if machine.communicate.ready?
+            @logger.info "#{ip_address} is reachable and SSH login OK"
+            return :reachable
+          else
+            if ssh_port_open? ip_address
+              @logger.info "#{ip_address} is reachable, SSH port open (but login failed)"
+              return :reachable
+            else 
+              if is_pingable? ip_address
+                @logger.info "#{ip_address} is pingable (but SSH failed)"
+                return :reachable
+              end
+            end
           end
 
-          # Return the state
-          return server.state.to_sym
+          # host is not reachable at all...
+          return :not_reachable
+=end
+
+          return machine.communicate.ready? ? :running : :not_reachable
+        end
+
+
+        def is_pingable?(ip)
+          if Vagrant::Util::Platform.windows?
+            system("ping -n 1 #{ip}")
+          else
+            system("ping -q -c 1 #{ip}")
+          end
+        end
+
+        def ssh_port_open?(ip)
+          is_port_open?(ip, 22)
+        end
+
+        #
+        # borrowed from http://stackoverflow.com/a/3473208/2388971
+        #
+        def is_port_open?(ip, port)
+          require 'socket'
+          s = Socket.new(Socket::AF_INET, Socket::SOCK_STREAM, 0)
+          sa = Socket.sockaddr_in(port, ip)
+          begin
+            s.connect_nonblock(sa)
+          rescue Errno::EINPROGRESS
+            if IO.select(nil, [s], nil, 1)
+              begin
+                s.connect_nonblock(sa)
+              rescue Errno::EISCONN
+                return true
+              rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH
+                return false
+              end
+            end
+          end
+          return false
         end
       end
     end
