@@ -3,11 +3,11 @@
 This is a [Vagrant](http://www.vagrantup.com) 1.2+ plugin that adds a provider for "managed servers" to Vagrant, i.e. servers for which you have SSH access but no control over their lifecycle.
 
 Since you don't control the lifecylce:
- * `up` and `destroy` are re-interpreted for "linking" / "unlinking" vagrant with a managed server
- * once "linked", the `ssh` and `provision` commands work as expected 
+ * `up` and `destroy` are re-interpreted as "linking" / "unlinking" vagrant with a managed server
+ * once "linked", the `ssh` and `provision` commands work as expected and `status` shows the managed server as either "running" or "not reachable"
  * `halt`, `destroy`, `reload` and `suspend` and `resume` are no-ops in this provider
 
-Credits: this provider was initially based on the [vagrant-aws](https://github.com/mitchellh/vagrant-aws) provider and AWS-specific functionality stripped out.
+Credits: this provider was initially based on the [vagrant-aws](https://github.com/mitchellh/vagrant-aws) provider with the AWS-specific functionality stripped out.
 
 **NOTE:** This plugin requires Vagrant 1.2+
 
