@@ -1,5 +1,7 @@
 # Vagrant ManagedServers Provider
 
+[![Build Status](https://travis-ci.org/tknerr/vagrant-managed-servers.png?branch=master)](https://travis-ci.org/tknerr/vagrant-managed-servers)
+
 This is a [Vagrant](http://www.vagrantup.com) 1.2+ plugin that adds a provider for "managed servers" to Vagrant, i.e. servers for which you have SSH access but no control over their lifecycle.
 
 Since you don't control the lifecylce:
