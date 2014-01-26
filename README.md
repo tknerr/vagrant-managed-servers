@@ -7,7 +7,7 @@ This is a [Vagrant](http://www.vagrantup.com) 1.2+ plugin that adds a provider f
 Since you don't control the lifecylce:
  * `up` and `destroy` are re-interpreted as "linking" / "unlinking" vagrant with a managed server
  * once "linked", the `ssh` and `provision` commands work as expected and `status` shows the managed server as either "running" or "not reachable"
- * `halt`, `destroy`, `reload` and `suspend` and `resume` are no-ops in this provider
+ * `halt`, `reload` and `suspend` and `resume` are no-ops in this provider
 
 Credits: this provider was initially based on the [vagrant-aws](https://github.com/mitchellh/vagrant-aws) provider with the AWS-specific functionality stripped out.
 
