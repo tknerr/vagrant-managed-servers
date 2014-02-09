@@ -54,13 +54,15 @@ module VagrantPlugins
             # Create the guest path
             env[:machine].communicate.sudo("mkdir -p '#{guestpath}'")
             env[:machine].communicate.sudo(
-              "chown #{ssh_info[:username]} '#{guestpath}'")
+              "chown -R #{ssh_info[:username]} '#{guestpath}'")
 
             # Rsync over to the guest path using the SSH info
+            ssh_key_options = Array(ssh_info[:private_key_path]).map { |path| "-i '#{path}' " }.join
+            ssh_proxy_commands = Array(ssh_info[:proxy_command]).map { |command| "-o ProxyCommand='#{command}' "}.join
             command = [
               "rsync", "--verbose", "--archive", "-z",
-              "--exclude", ".vagrant/",
-              "-e", "ssh -p #{ssh_info[:port]} -o StrictHostKeyChecking=no -i '#{ssh_info[:private_key_path]}'",
+              "--exclude", ".vagrant/", "--exclude", "Vagrantfile",
+              "-e", "ssh -p #{ssh_info[:port]} -o StrictHostKeyChecking=no #{ssh_key_options} #{ssh_proxy_commands}",
               hostpath,
               "#{ssh_info[:username]}@#{ssh_info[:host]}:#{guestpath}"]
 
