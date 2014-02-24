@@ -38,7 +38,7 @@ Of course prior to doing this, you'll need to obtain an managed server-compatibl
 After installing the plugin (instructions above), the quickest way to get started is to actually use a managed server dummy box and specify the IP address / hostname of the managed server within a `config.vm.provider` block. So first, add the dummy box using any name you want:
 
 ```
-$ vagrant box add dummy https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box
+$ vagrant box add dummy https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box --provider=managed
 ...
 ```
 
