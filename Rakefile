@@ -19,3 +19,15 @@ RSpec::Core::RakeTask.new
 
 # Default task is to run the unit tests
 task :default => "spec"
+
+# run acceptance "test" as described in README
+task :acceptance do
+  begin
+    ENV['OMNIBUS_INSTALL_URL'] = "https://gist.githubusercontent.com/tknerr/9205663/raw/install.sh"
+    sh "vagrant up fake_managed_server"
+    sh "vagrant up my_server --provider=managed"
+    sh "vagrant provision my_server"
+  ensure
+    sh "vagrant destroy -f"
+  end
+end
