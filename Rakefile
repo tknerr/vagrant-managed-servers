@@ -20,7 +20,7 @@ RSpec::Core::RakeTask.new
 # Default task is to run the unit tests
 task :default => "spec"
 
-# run acceptance "test" as described in README
+desc "runs the acceptance \"test\" as described in README"
 task :acceptance do
   begin
     sh "vagrant up fake_managed_server"
