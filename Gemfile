@@ -15,5 +15,4 @@ group :development do
   gem "vagrant-omnibus", "1.3.0",
     :git => "https://github.com/schisamo/vagrant-omnibus.git",
     :ref => "4c91e0f85acdaa88de5e21c5f3f61471a28455d2"
-  gem "vagrant-cachier", "0.5.1"
 end
