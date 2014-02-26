@@ -1,5 +1,9 @@
 
-# 0.2.0 (unreleased)
+# 0.3.0 (unreleased)
+
+* ...
+
+# 0.2.0 (released 2014-02-26)
 
 * fix rsync command for Vagrant 1.4 compatibility ([#15](https://github.com/tknerr/vagrant-managed-servers/issues/15))
 * chown synced dirs recursively ([#13](https://github.com/tknerr/vagrant-managed-servers/issues/13))
