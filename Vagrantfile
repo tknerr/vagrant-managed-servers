@@ -4,11 +4,12 @@
 # require plugin for testing via bundler
 Vagrant.require_plugin "vagrant-managed-servers"
 Vagrant.require_plugin "vagrant-omnibus"
+Vagrant.require_plugin "vagrant-berkshelf"
 
 Vagrant.configure("2") do |config|
 
-  config.omnibus.chef_version = "11.4.4"
-    
+  config.omnibus.chef_version = "11.10.4"
+  config.berkshelf.enabled = true
 
   #
   # fake a managed server by bringing up a virtualbox vm

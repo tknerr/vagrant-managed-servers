@@ -15,9 +15,9 @@ Gem::Specification.new do |s|
   s.rubyforge_project         = "vagrant-managed-servers"
 
   s.add_development_dependency "rake"
-  s.add_development_dependency "rspec-core", "~> 2.12.2"
-  s.add_development_dependency "rspec-expectations", "~> 2.12.1"
-  s.add_development_dependency "rspec-mocks", "~> 2.12.1"
+  s.add_development_dependency "rspec-core", "~> 2.14.7"
+  s.add_development_dependency "rspec-expectations", "~> 2.14.5"
+  s.add_development_dependency "rspec-mocks", "~> 2.14.6"
 
   # The following block of code determines the files that should be included
   # in the gem. It does this by reading all the files in the directory where
