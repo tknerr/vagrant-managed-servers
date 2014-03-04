@@ -5,11 +5,14 @@
 Vagrant.require_plugin "vagrant-managed-servers"
 Vagrant.require_plugin "vagrant-omnibus"
 Vagrant.require_plugin "vagrant-berkshelf"
+Vagrant.require_plugin "vagrant-cachier"
 
 Vagrant.configure("2") do |config|
 
+  ENV['OMNIBUS_INSTALL_URL'] = "https://gist.githubusercontent.com/tknerr/9205663/raw/install.sh"
   config.omnibus.chef_version = "11.10.4"
   config.berkshelf.enabled = true
+  config.cache.auto_detect = true
 
   #
   # fake a managed server by bringing up a virtualbox vm
