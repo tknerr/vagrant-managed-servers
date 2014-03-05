@@ -10,6 +10,7 @@ Vagrant.require_plugin "vagrant-cachier"
 Vagrant.configure("2") do |config|
 
   ENV['OMNIBUS_INSTALL_URL'] = "https://gist.githubusercontent.com/tknerr/9205663/raw/install.sh"
+  ENV['OMNIBUS_DOWNLOAD_DIR'] = "/tmp/vagrant-cache/omnibus"
   config.omnibus.chef_version = "11.10.4"
   config.berkshelf.enabled = true
   config.cache.auto_detect = true
