@@ -16,8 +16,7 @@ Vagrant.configure("2") do |config|
   #
   config.vm.define :my_server do |ms_config|
 
-    ms_config.vm.box = "dummy"
-    ms_config.vm.box_url = "https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box"
+    ms_config.vm.box = "tknerr/managed-server-dummy"
 
     ms_config.omnibus.chef_version = "11.14.6"
     ms_config.berkshelf.enabled = true
