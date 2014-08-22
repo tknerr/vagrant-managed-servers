@@ -1,7 +1,11 @@
 
 # 0.3.0 (unreleased)
 
+Updates for improving the experience with Vagrant 1.5+ (but still keeping backwards-compatibility with 1.2):
+
 * fix warning when using Vagrant > 1.5 ([#19](https://github.com/tknerr/vagrant-managed-servers/issues/19), thanks @nicolasbrechet!)
+* use the [tknerr/managed-server-dummy](https://vagrantcloud.com/tknerr/managed-server-dummy) vagrantcloud box ([#22](https://github.com/tknerr/vagrant-managed-servers/pull/22))
+* updated the development environment and sample Vagrantfile for this project to latest Vagrant and plugin versions
 
 # 0.2.0 (released 2014-02-26)
 
