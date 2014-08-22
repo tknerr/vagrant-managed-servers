@@ -1,7 +1,7 @@
 
 # 0.3.0 (unreleased)
 
-* ...
+* fix warning when using Vagrant > 1.5 ([#19](https://github.com/tknerr/vagrant-managed-servers/issues/19), thanks @nicolasbrechet!)
 
 # 0.2.0 (released 2014-02-26)
 
