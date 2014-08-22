@@ -11,7 +11,11 @@ module VagrantPlugins
       # This action is called to establish linkage between vagrant and the managed server
       def self.action_up
         Vagrant::Action::Builder.new.tap do |b|
-          b.use HandleBoxUrl
+          if Vagrant::VERSION < '1.5.0'
+            b.use HandleBoxUrl
+          else
+            b.use HandleBox
+          end
           b.use ConfigValidate
           b.use WarnNetworks
           b.use LinkServer
