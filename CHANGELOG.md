@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 0.4.0 (unreleased)
+
+* ...
+
 ## 0.3.0 (released 2014-08-23)
 
 Updates for improving the experience with Vagrant 1.5+ (but still keeping backwards-compatibility with 1.2):
