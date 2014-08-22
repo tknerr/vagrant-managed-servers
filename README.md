@@ -44,7 +44,7 @@ $ vagrant box add dummy https://github.com/tknerr/vagrant-managed-servers/raw/ma
 
 And then make a Vagrantfile that looks like the following, filling in your information where necessary.
 
-```
+```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "dummy"
 
