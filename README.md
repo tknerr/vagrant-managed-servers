@@ -21,12 +21,12 @@ Credits: this provider was initially based on the [vagrant-aws](https://github.c
 
 ## Usage
 
-Install using standard Vagrant 1.1+ plugin installation method:
+Install using the standard Vagrant plugin installation method:
 ```
 $ vagrant plugin install vagrant-managed-servers
 ```
 
-In the Vagrantfile you can now use the `managed` provider with the [tknerr/managed-server-dummy](https://vagrantcloud.com/tknerr/managed-server-dummy) basebox (see [here](https://github.com/tknerr/vagrant-managed-servers#box-format) for Vagrant < 1.5 usage) and specify the managed server's hostname and credentials:
+In the Vagrantfile you can now use the `managed` provider and specify the managed server's hostname and credentials:
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "tknerr/managed-server-dummy"
