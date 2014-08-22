@@ -1,24 +1,14 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# require plugin for testing via bundler
-Vagrant.require_plugin "vagrant-managed-servers"
-Vagrant.require_plugin "vagrant-omnibus"
-Vagrant.require_plugin "vagrant-berkshelf"
-
 Vagrant.configure("2") do |config|
-
-  config.omnibus.chef_version = "11.10.4"
-  config.berkshelf.enabled = true
 
   #
   # fake a managed server by bringing up a virtualbox vm
   #
   config.vm.define :fake_managed_server do |fms_config|
-    fms_config.vm.box = "opscode_ubuntu-13.04_provisionerless"
-    fms_config.vm.box_url = "https://opscode-vm.s3.amazonaws.com/vagrant/opscode_ubuntu-13.04_provisionerless.box"
-  
-    fms_config.vm.network :private_network, ip: "33.33.77.35"
+    fms_config.vm.box = "chef/ubuntu-12.04-i386"
+    fms_config.vm.network :private_network, ip: "192.168.40.35"
   end
 
   #
@@ -28,9 +18,12 @@ Vagrant.configure("2") do |config|
 
     ms_config.vm.box = "dummy"
     ms_config.vm.box_url = "https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box"
+
+    ms_config.omnibus.chef_version = "11.14.6"
+    ms_config.berkshelf.enabled = true
   
     ms_config.vm.provider :managed do |managed_config, override|
-      managed_config.server = "33.33.77.35"
+      managed_config.server = "192.168.40.35"
       override.ssh.username = "vagrant"
       override.ssh.private_key_path = "#{ENV['HOME']}/.vagrant.d/insecure_private_key"
     end
