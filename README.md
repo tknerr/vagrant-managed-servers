@@ -26,7 +26,7 @@ Install using standard Vagrant 1.1+ plugin installation method:
 $ vagrant plugin install vagrant-managed-servers
 ```
 
-In the Vagrantfile you can now use the `managed` provider to specify the managed server's ip address / hostname and credentials:
+In the Vagrantfile you can now use the `managed` provider with the [tknerr/managed-server-dummy](https://vagrantcloud.com/tknerr/managed-server-dummy) basebox (see [here](https://github.com/tknerr/vagrant-managed-servers#box-format) for Vagrant < 1.5 usage) and specify the managed server's hostname and credentials:
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "tknerr/managed-server-dummy"
@@ -85,7 +85,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-For Vagrant < 1.5 you can point to the [dummy.box](https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box) URL:
+For Vagrant < 1.5 you can point to the [dummy.box](https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box) URL directly:
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "managed-server-dummy"
