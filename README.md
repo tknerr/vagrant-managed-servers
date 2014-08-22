@@ -21,56 +21,78 @@ Credits: this provider was initially based on the [vagrant-aws](https://github.c
 
 ## Usage
 
-Install using standard Vagrant 1.1+ plugin installation methods. After installing, `vagrant up` and specify the `managed` provider. An example is shown below.
-
+Install using standard Vagrant 1.1+ plugin installation method:
 ```
 $ vagrant plugin install vagrant-managed-servers
-...
-$ vagrant up --provider=managed
-$ vagrant provision
-...
 ```
 
-Of course prior to doing this, you'll need to obtain an managed server-compatible box file for Vagrant. Simply use the managed server dummy box for this purpose (see below).
-
-## Quick Start
-
-After installing the plugin (instructions above), the quickest way to get started is to actually use a managed server dummy box and specify the IP address / hostname of the managed server within a `config.vm.provider` block. So first, add the dummy box using any name you want:
-
-```
-$ vagrant box add dummy https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box --provider=managed
-...
-```
-
-And then make a Vagrantfile that looks like the following, filling in your information where necessary.
-
+In the Vagrantfile you can now use the `managed` provider to specify the managed server's ip address / hostname and credentials:
 ```ruby
 Vagrant.configure("2") do |config|
-  config.vm.box = "dummy"
+  config.vm.box = "tknerr/managed-server-dummy"
 
   config.vm.provider :managed do |managed, override|
-    managed.server = "ip-or-hostname"
-    override.ssh.username = "ubuntu"
-    override.ssh.private_key_path = "PATH TO YOUR PRIVATE KEY"
+    managed.server = "foo.acme.com"
+    override.ssh.username = "bob"
+    override.ssh.private_key_path = "/path/to/bobs_private_key"
   end
 end
 ```
 
-Then run `vagrant up --provider=managed` to "link" vagrant with the managed server. 
+Next run `vagrant up --provider=managed` in order to "link" the vagrant VM with the managed server: 
+```
+$ vagrant up --provider=managed
+Bringing machine 'default' up with 'managed' provider...
+==> default: Box 'tknerr/managed-server-dummy' could not be found. Attempting to find and install...
+    default: Box Provider: managed
+    default: Box Version: >= 0
+==> default: Loading metadata for box 'tknerr/managed-server-dummy'
+    default: URL: https://vagrantcloud.com/tknerr/managed-server-dummy
+==> default: Adding box 'tknerr/managed-server-dummy' (v1.0.0) for provider: managed
+    default: Downloading: https://vagrantcloud.com/tknerr/managed-server-dummy/version/1/provider/managed.box
+    default: Progress: 100% (Rate: 122k/s, Estimated time remaining: --:--:--)
+==> default: Successfully added box 'tknerr/managed-server-dummy' (v1.0.0) for 'managed'!
+==> default: Linking vagrant with managed server foo.acme.com
+==> default:  -- Server: foo.acme.com
+```
 
-Once linked, you can run `vagrant ssh` to ssh into the managed server or `vagrant provision` to provision that server with any of the available vagrant provisioners. 
+Once linked, you can run `vagrant ssh` to ssh into the managed server or `vagrant provision` to provision that server with any of the available vagrant provisioners:
+```
+$ vagrant provision
+...
+$ vagrant ssh
+...
+``` 
 
-If you are done, you can "unlink" vagrant from the managed server by running `vagrant destroy`.
+If you are done, you can "unlink" vagrant from the managed server by running `vagrant destroy`:
+```
+$ vagrant destroy -f
+==> default: Unlinking vagrant from managed server foo.acme.com
+==> default:  -- Server: foo.acme.com
+```
 
 If you try any of the other VM lifecycle commands like `halt`, `resume`, `reload`, etc... you will get a warning that these commands are not supported with the vagrant-managed-servers provider. 
 
 ## Box Format
 
-Every provider in Vagrant must introduce a custom box format. 
+Every provider in Vagrant must introduce a custom box format. This provider introduces a "dummy box" for the `managed` provider which is really nothing more than the required `metadata.json` with the provider name set to "managed". 
 
-This provider introduces `managed` box which is really nothing more than the required `metadata.json` with the provider name set to "managed".
+For Vagrant 1.5+ you can use the [tknerr/managed-server-dummy](https://vagrantcloud.com/tknerr/managed-server-dummy) vagrantcloud box:
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "tknerr/managed-server-dummy"
+  ...
+end
+```
 
-Typically you will not need to change this and can always use the [dummy.box](https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box)
+For Vagrant < 1.5 you can point to the [dummy.box](https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box) URL:
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "managed-server-dummy"
+  config.vm.box_url = "https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box"
+  ...
+end
+```
 
 ## Configuration
 
