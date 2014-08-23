@@ -3,7 +3,7 @@
 
 ## 0.4.0 (unreleased)
 
-* ...
+* update licensing information and add license to gemspec
 
 ## 0.3.0 (released 2014-08-23)
 
