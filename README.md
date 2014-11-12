@@ -129,8 +129,8 @@ This is good enough for all built-in Vagrant provisioners (shell,
 chef, and puppet) to work!
 
 ## Windows support
-It is possible to use this plugin to control pre-existing windows servers, with
-a few prerequisites:
+It is possible to use this plugin to control pre-existing windows servers using
+WinRM instead of rsync, with a few prerequisites:
 
 * WinRM installed and running on the target machine
 * The account used to connect is a local account and also a local administrator (domain accounts don't work over basic auth)
@@ -141,7 +141,7 @@ For more information, see the WinRM Gem [Troubleshooting Guide](https://github.c
 
 Your vagrantfile will look something like this:
 ```ruby
-config.vm.define "my-windows-server" do |windows|
+config.vm.define 'my-windows-server' do |windows|
   windows.vm.communicator = :winrm
   windows.winrm.username = 'vagrant'
   windows.winrm.password = 'vagrant'
@@ -155,7 +155,7 @@ that you disable synched folders that aren't critical. For instance, to disable 
 default /vagrant share, you could use the following code:
 
 ```ruby
-windows.vm.synced_folder ".", "/vagrant", disabled: true
+windows.vm.synced_folder '.', '/vagrant', disabled: true
 ```
 
 ## Development
