@@ -39,7 +39,7 @@ Vagrant.configure("2") do |config|
 end
 ```
 
-Next run `vagrant up --provider=managed` in order to "link" the vagrant VM with the managed server: 
+Next run `vagrant up --provider=managed` in order to "link" the vagrant VM with the managed server:
 ```
 $ vagrant up --provider=managed
 Bringing machine 'default' up with 'managed' provider...
@@ -62,7 +62,7 @@ $ vagrant provision
 ...
 $ vagrant ssh
 ...
-``` 
+```
 
 If you are done, you can "unlink" vagrant from the managed server by running `vagrant destroy`:
 ```
@@ -71,11 +71,11 @@ $ vagrant destroy -f
 ==> default:  -- Server: foo.acme.com
 ```
 
-If you try any of the other VM lifecycle commands like `halt`, `resume`, `reload`, etc... you will get a warning that these commands are not supported with the vagrant-managed-servers provider. 
+If you try any of the other VM lifecycle commands like `halt`, `resume`, `reload`, etc... you will get a warning that these commands are not supported with the vagrant-managed-servers provider.
 
 ## Box Format
 
-Every provider in Vagrant must introduce a custom box format. This provider introduces a "dummy box" for the `managed` provider which is really nothing more than the required `metadata.json` with the provider name set to "managed". 
+Every provider in Vagrant must introduce a custom box format. This provider introduces a "dummy box" for the `managed` provider which is really nothing more than the required `metadata.json` with the provider name set to "managed".
 
 For Vagrant 1.5+ you can use the [tknerr/managed-server-dummy](https://vagrantcloud.com/tknerr/managed-server-dummy) vagrantcloud box:
 ```ruby
@@ -120,13 +120,43 @@ specified, Vagrant will emit a warning and just ignore it.
 
 ## Synced Folders
 
-There is minimal support for synced folders. Upon `vagrant provision`, 
+There is minimal support for synced folders. Upon `vagrant provision`,
 the managed servers provider will use
 `rsync` (if available) to uni-directionally sync the folder to
 the remote machine over SSH.
 
 This is good enough for all built-in Vagrant provisioners (shell,
 chef, and puppet) to work!
+
+## Windows support
+It is possible to use this plugin to control pre-existing windows servers, with
+a few prerequisites:
+
+* WinRM installed and running on the target machine
+* The account used to connect is a local account and also a local administrator (domain accounts don't work over basic auth)
+* WinRM basic authentication is enabled
+* WinRM unencrypted traffic is enabled
+
+For more information, see the WinRM Gem [Troubleshooting Guide](https://github.com/WinRb/WinRM#troubleshooting)
+
+Your vagrantfile will look something like this:
+```ruby
+config.vm.define "my-windows-server" do |windows|
+  windows.vm.communicator = :winrm
+  windows.winrm.username = 'vagrant'
+  windows.winrm.password = 'vagrant'
+  windows.vm.provider :managed do |managed, override|
+    managed.server = 'myserver.mydomain.com'
+  end
+end
+```
+Synchronization of files using WinRM is known to be slow, so it is recommended
+that you disable synched folders that aren't critical. For instance, to disable the
+default /vagrant share, you could use the following code:
+
+```ruby
+windows.vm.synced_folder ".", "/vagrant", disabled: true
+```
 
 ## Development
 

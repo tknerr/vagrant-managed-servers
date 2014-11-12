@@ -30,13 +30,22 @@ module VagrantPlugins
             # Ignore disabled shared folders
             next if data[:disabled]
 
+            hostpath  = File.expand_path(data[:hostpath], env[:root_path])
+            guestpath = data[:guestpath]
+
+            # Windows doesn't support ssh or rsync natively. Use winrm instead
+            if (env[:machine].config.vm.communicator == :winrm) then
+              env[:ui].info(I18n.t('vagrant_managed_servers.winrm_upload'))
+              env[:machine].communicate.tap do |comm|
+                comm.upload(hostpath, guestpath)
+              end
+              return
+            end
+
             unless Vagrant::Util::Which.which('rsync')
               env[:ui].warn(I18n.t('vagrant_managed_servers.rsync_not_found_warning'))
               break
             end
-
-            hostpath  = File.expand_path(data[:hostpath], env[:root_path])
-            guestpath = data[:guestpath]
 
             # Make sure there is a trailing slash on the host path to
             # avoid creating an additional directory with rsync
