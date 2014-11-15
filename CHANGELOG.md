@@ -1,9 +1,10 @@
 
 # Changelog
 
-## 0.4.0 (unreleased)
+## 0.4.0 (released 2014-11-15)
 
 * update licensing information and add license to gemspec
+* add support for windows managed servers via winrm ([#29](https://github.com/tknerr/vagrant-managed-servers/pull/29), thanks @chrisbaldauf!)
 
 ## 0.3.0 (released 2014-08-23)
 
