@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 0.5.0 (unreleased)
+
+* ...
+
 ## 0.4.0 (released 2014-11-15)
 
 * update licensing information and add license to gemspec
