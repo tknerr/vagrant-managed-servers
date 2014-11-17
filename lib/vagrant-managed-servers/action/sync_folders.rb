@@ -35,7 +35,9 @@ module VagrantPlugins
 
             # Windows doesn't support ssh or rsync natively. Use winrm instead
             if (env[:machine].config.vm.communicator == :winrm) then
-              env[:ui].info(I18n.t('vagrant_managed_servers.winrm_upload'))
+              env[:ui].info(I18n.t('vagrant_managed_servers.winrm_upload',
+                                  :hostpath => hostpath,
+                                  :guestpath => guestpath))
               env[:machine].communicate.tap do |comm|
                 comm.upload(hostpath, guestpath)
               end
