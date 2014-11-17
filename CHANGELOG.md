@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 0.5.0 (unreleased)
+
+* ...
+
 ## 0.4.1 (released 2014-11-17)
 
 * fix missing parameters in translation for winrm ([#30](https://github.com/tknerr/vagrant-managed-servers/pull/30), thanks @chrisbaldauf!)
