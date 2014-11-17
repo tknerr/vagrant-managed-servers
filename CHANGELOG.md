@@ -1,9 +1,10 @@
 
 # Changelog
 
-## 0.5.0 (unreleased)
+## 0.4.1 (unreleased)
 
-* ...
+* fix missing parameters in translation for winrm ([#30](https://github.com/tknerr/vagrant-managed-servers/pull/30), thanks @chrisbaldauf!)
+* clean up Rakefile and fix travis-ci build
 
 ## 0.4.0 (released 2014-11-15)
 
