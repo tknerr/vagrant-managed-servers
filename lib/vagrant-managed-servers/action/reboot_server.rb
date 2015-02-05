@@ -29,6 +29,9 @@ module VagrantPlugins
               machine_up = true
               while machine_up
                 begin
+                  # communicate.ready? takes a long time to return false (the indication that the machine has gone down for reboot)
+                  # and this was causing the loop to never register that the machine had gone down. So if it has taken a long time to
+                  # return, we assume that the machine has indeed gone down. 
                   status = Timeout::timeout(5) { machine_up = env[:machine].communicate.ready? }
                 rescue Exception => err
                   # The Timeout::Error is getting swallowed somewhere. If err is execution expired, then the timeout was hit.
