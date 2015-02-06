@@ -103,7 +103,7 @@ module VagrantPlugins
         end
       end
 
-      def self.action_reboot
+      def self.action_reload
         Vagrant::Action::Builder.new.tap do |b|
           b.use RebootServer
         end

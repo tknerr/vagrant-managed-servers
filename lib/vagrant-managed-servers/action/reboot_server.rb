@@ -13,8 +13,8 @@ module VagrantPlugins
         end
 
         def call(env)
-
           server = env[:machine].id
+
           boot_timeout = env[:machine].config.vm.boot_timeout ## This is user configurable, defaults to 300 seconds
 
           # "Reboot"
@@ -31,7 +31,7 @@ module VagrantPlugins
                 begin
                   # communicate.ready? takes a long time to return false (the indication that the machine has gone down for reboot)
                   # and this was causing the loop to never register that the machine had gone down. So if it has taken a long time to
-                  # return, we assume that the machine has indeed gone down. 
+                  # return, we assume that the machine has indeed gone down.
                   status = Timeout::timeout(5) { machine_up = env[:machine].communicate.ready? }
                 rescue Exception => err
                   # The Timeout::Error is getting swallowed somewhere. If err is execution expired, then the timeout was hit.
