@@ -7,7 +7,7 @@ module VagrantPlugins
     module Action
       # Include the built-in modules so we can use them as top-level things.
       include Vagrant::Action::Builtin
-      
+
       # This action is called to establish linkage between vagrant and the managed server
       def self.action_up
         Vagrant::Action::Builder.new.tap do |b|
@@ -103,6 +103,11 @@ module VagrantPlugins
         end
       end
 
+      def self.action_reload
+        Vagrant::Action::Builder.new.tap do |b|
+          b.use RebootServer
+        end
+      end
 
       # The autoload farm
       action_root = Pathname.new(File.expand_path("../action", __FILE__))
@@ -113,6 +118,7 @@ module VagrantPlugins
       autoload :WarnNetworks, action_root.join("warn_networks")
       autoload :LinkServer, action_root.join("link_server")
       autoload :UnlinkServer, action_root.join("unlink_server")
+      autoload :RebootServer, action_root.join("reboot_server")
     end
   end
 end

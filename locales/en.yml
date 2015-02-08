@@ -17,6 +17,10 @@ en:
       Linking vagrant with managed server %{host}
     unlinking_server: |-
       Unlinking vagrant from managed server %{host}
+    rebooting_server: |-
+      Rebooting managed server %{host}
+    waiting_for_server: |-
+      Waiting for %{host} to reboot
     states:
       short_not_reachable: |-
         not reachable
