@@ -1,9 +1,9 @@
 
 # Changelog
 
-## 0.5.0 (unreleased)
+## 0.5.0 (released 2015-02-08)
 
-* ...
+* add `reload` functionality ([#31](https://github.com/tknerr/vagrant-managed-servers/pull/31), thanks @jdaviscooke!)
 
 ## 0.4.1 (released 2014-11-17)
 
