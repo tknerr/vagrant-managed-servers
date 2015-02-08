@@ -84,7 +84,7 @@ $ vagrant destroy -f
 ==> default:  -- Server: foo.acme.com
 ```
 
-If you try any of the other VM lifecycle commands like `halt`, `resume`, `reload`, etc... you will get a warning that these commands are not supported with the vagrant-managed-servers provider.
+If you try any of the other VM lifecycle commands like `halt`, `suspend`, `resume`, etc... you will get a warning that these commands are not supported with the vagrant-managed-servers provider.
 
 ## Box Format
 
