@@ -7,7 +7,8 @@ This is a [Vagrant](http://www.vagrantup.com) 1.2+ plugin that adds a provider f
 Since you don't control the lifecycle:
  * `up` and `destroy` are re-interpreted as "linking" / "unlinking" vagrant with a managed server
  * once "linked", the `ssh` and `provision` commands work as expected and `status` shows the managed server as either "running" or "not reachable"
- * `halt`, `reload` and `suspend` and `resume` are no-ops in this provider
+ * `reload` will issue a reboot command on the managed server (cross your fingers ;-))
+ * `halt`, `suspend` and `resume` are no-ops in this provider
 
 Credits: this provider was initially based on the [vagrant-aws](https://github.com/mitchellh/vagrant-aws) provider with the AWS-specific functionality stripped out.
 
@@ -17,6 +18,7 @@ Credits: this provider was initially based on the [vagrant-aws](https://github.c
 
 * SSH into managed servers.
 * Provision managed servers with any built-in Vagrant provisioner.
+* Reboot a managed server.
 * Minimal synced folder support via `rsync`.
 
 ## Usage
@@ -62,6 +64,17 @@ $ vagrant provision
 ...
 $ vagrant ssh
 ...
+```
+
+In some cases you might need to reboot the managed server via `vagrant reload`:
+```
+$ vagrant reload
+==> default: Rebooting managed server foo.acme.com
+==> default:  -- Server: foo.acme.com
+==> default: Waiting for foo.acme.com to reboot
+==> default: Waiting for foo.acme.com to reboot
+==> default: Waiting for foo.acme.com to reboot
+==> default:  foo.acme.com rebooted and ready.
 ```
 
 If you are done, you can "unlink" vagrant from the managed server by running `vagrant destroy`:
