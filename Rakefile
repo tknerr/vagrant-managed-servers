@@ -17,6 +17,7 @@ task :acceptance do
     sh "vagrant up fake_managed_server"
     sh "vagrant up my_server --provider=managed"
     sh "vagrant provision my_server"
+    sh "vagrant reload my_server"
   ensure
     sh "vagrant destroy -f"
   end
