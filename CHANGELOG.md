@@ -1,9 +1,9 @@
 
 # Changelog
 
-## 0.6.0 (unreleased)
+## 0.5.1 (released 2015-02-15)
 
-* ...
+* fix bug where `vagrant help` failed due a leftover command declaration ([#32](https://github.com/tknerr/vagrant-managed-servers/pull/32), thanks @chrisbaldauf for reporting!)
 
 ## 0.5.0 (released 2015-02-08)
 
