@@ -1,5 +1,5 @@
 module VagrantPlugins
   module ManagedServers
-    VERSION = "0.5.1"
+    VERSION = "0.6.0.dev"
   end
 end
