@@ -23,11 +23,6 @@ module VagrantPlugins
         Config
       end
 
-      command(:reboot) do
-        require_relative "command/reboot"
-        Command::Reboot
-      end
-
       provider(:managed, parallel: true) do
         # Setup logging and i18n
         setup_logging
