@@ -22,6 +22,10 @@ en:
     waiting_for_server: |-
       Waiting for %{host} to reboot
     states:
+      short_not_created: |-
+        not linked
+      long_not_created: |-
+        The managed server is not "linked" with the vagrant VM yet.
       short_not_reachable: |-
         not reachable
       long_not_reachable: |-
