@@ -12,9 +12,9 @@ en:
     winrm_upload: |-
       Uploading with WinRM: %{hostpath} => %{guestpath}
     linking_server: |-
-      Linking vagrant with managed server %{host}
+      Linking with managed server %{host}
     unlinking_server: |-
-      Unlinking vagrant from managed server %{host}
+      Unlinking from managed server %{host}
     rebooting_server: |-
       Rebooting managed server %{host}
     waiting_for_server: |-
@@ -23,7 +23,11 @@ en:
       short_not_linked: |-
         not linked
       long_not_linked: |-
-        The managed server is not "linked" with the vagrant VM yet.
+        The managed server is not linked.
+      short_already_linked: |-
+        already linked
+      long_already_linked: |-
+        The managed server is already linked.
       short_not_reachable: |-
         not reachable
       long_not_reachable: |-

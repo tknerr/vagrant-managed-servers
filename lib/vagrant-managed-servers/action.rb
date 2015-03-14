@@ -18,7 +18,14 @@ module VagrantPlugins
           end
           b.use ConfigValidate
           b.use WarnNetworks
-          b.use LinkServer
+          b.use Call, IsLinked do |env, b2|
+            if env[:result]
+              b2.use MessageAlreadyLinked
+              next
+            end
+
+            b2.use LinkServer
+          end
 =begin
           b.use HandleBoxUrl
           b.use ConfigValidate
@@ -41,7 +48,14 @@ module VagrantPlugins
       def self.action_destroy
         Vagrant::Action::Builder.new.tap do |b|
           b.use ConfigValidate
-          b.use UnlinkServer
+          b.use Call, IsLinked do |env, b2|
+            if !env[:result]
+              b2.use MessageNotLinked
+              next
+            end
+
+            b2.use UnlinkServer
+          end
         end
       end
 
@@ -50,14 +64,21 @@ module VagrantPlugins
         Vagrant::Action::Builder.new.tap do |b|
           b.use ConfigValidate
           b.use WarnNetworks
-          b.use Call, IsReachable do |env, b2|
+          b.use Call, IsLinked do |env, b2|
             if !env[:result]
-              b2.use MessageNotReachable
+              b2.use MessageNotLinked
               next
             end
 
-            b2.use Provision
-            b2.use SyncFolders
+            b2.use Call, IsReachable do |env, b3|
+              if !env[:result]
+                b3.use MessageNotReachable
+                next
+              end
+
+              b3.use Provision
+              b3.use SyncFolders
+            end
           end
         end
       end
@@ -77,13 +98,20 @@ module VagrantPlugins
         Vagrant::Action::Builder.new.tap do |b|
           b.use ConfigValidate
           b.use WarnNetworks
-          b.use Call, IsReachable do |env, b2|
+          b.use Call, IsLinked do |env, b2|
             if !env[:result]
-              b2.use MessageNotReachable
+              b2.use MessageNotLinked
               next
             end
 
-            b2.use SSHExec
+            b2.use Call, IsReachable do |env, b3|
+              if !env[:result]
+                b3.use MessageNotReachable
+                next
+              end
+
+              b3.use SSHExec
+            end
           end
         end
       end
@@ -92,27 +120,44 @@ module VagrantPlugins
         Vagrant::Action::Builder.new.tap do |b|
           b.use ConfigValidate
           b.use WarnNetworks
-          b.use Call, IsReachable do |env, b2|
+          b.use Call, IsLinked do |env, b2|
             if !env[:result]
-              b2.use MessageNotReachable
+              b2.use MessageNotLinked
               next
             end
 
-            b2.use SSHRun
+            b2.use Call, IsReachable do |env, b3|
+              if !env[:result]
+                b3.use MessageNotReachable
+                next
+              end
+
+              b3.use SSHRun
+            end
           end
         end
       end
 
       def self.action_reload
         Vagrant::Action::Builder.new.tap do |b|
-          b.use RebootServer
+          b.use Call, IsLinked do |env, b2|
+            if !env[:result]
+              b2.use MessageNotLinked
+              next
+            end
+
+            b2.use RebootServer
+          end
         end
       end
 
       # The autoload farm
       action_root = Pathname.new(File.expand_path("../action", __FILE__))
+      autoload :IsLinked, action_root.join("is_linked")
       autoload :IsReachable, action_root.join("is_reachable")
       autoload :MessageNotReachable, action_root.join("message_not_reachable")
+      autoload :MessageNotLinked, action_root.join("message_not_linked")
+      autoload :MessageAlreadyLinked, action_root.join("message_already_linked")
       autoload :ReadState, action_root.join("read_state")
       autoload :SyncFolders, action_root.join("sync_folders")
       autoload :WarnNetworks, action_root.join("warn_networks")
