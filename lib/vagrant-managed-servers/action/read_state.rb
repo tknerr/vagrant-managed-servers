@@ -17,7 +17,7 @@ module VagrantPlugins
         end
 
         def read_state(machine)
-          return :not_created if machine.id.nil?
+          return :not_linked if machine.id.nil?
 
           ip_address = machine.id
 =begin
