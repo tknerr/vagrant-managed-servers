@@ -2,8 +2,7 @@ en:
   vagrant_managed_servers:
     warn_networks: |-
       Warning! The ManagedServers provider doesn't support any of the Vagrant
-      high-level network configurations (`config.vm.network`). They
-      will be silently ignored.
+      high-level network configurations (`config.vm.network`). They will be ignored.
     rsync_not_found_warning: |-
       Warning! Folder sync disabled because the rsync binary is missing.
       Make sure rsync is installed and the binary can be found in the PATH.
