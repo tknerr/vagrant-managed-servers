@@ -2,14 +2,15 @@ module VagrantPlugins
   module ManagedServers
     module Action
       # This can be used with "Call" built-in to check if the machine
-      # is created and branch in the middleware.
-      class IsCreated
+      # is linked and branch in the middleware.
+      class IsLinked
         def initialize(app, env)
           @app = app
         end
 
         def call(env)
-          env[:result] = env[:machine].state.id != :not_created
+          puts "woaahhhhh - state.id is #{env[:machine].state.id}"
+          env[:result] = env[:machine].state.id != :not_linked
           @app.call(env)
         end
       end
