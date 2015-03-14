@@ -1,7 +1,5 @@
 en:
   vagrant_managed_servers:
-    host_not_reachable: |-
-      The host specified in `config.managed.server` is not reachable.
     warn_networks: |-
       Warning! The ManagedServers provider doesn't support any of the Vagrant
       high-level network configurations (`config.vm.network`). They
