@@ -4,6 +4,7 @@
 ## 0.6.0 (unreleased)
 
 * add missing translation for `vagrant status` ([#35](https://github.com/tknerr/vagrant-managed-servers/issues/35), thanks @warrenseine for reporting!)
+* actually check whether a server is linked before doing any other action (fixes [#34](https://github.com/tknerr/vagrant-managed-servers/issues/34), thanks @warrenseine for reporting!)
 
 ## 0.5.1 (released 2015-02-15)
 

@@ -1,13 +1,15 @@
 module VagrantPlugins
   module ManagedServers
     module Action
-      class MessageNotReachable
+      # This can be used with "Call" built-in to check if the machine
+      # is linked and branch in the middleware.
+      class IsLinked
         def initialize(app, env)
           @app = app
         end
 
         def call(env)
-          env[:ui].info(I18n.t("vagrant_managed_servers.states.long_not_reachable"))
+          env[:result] = env[:machine].state.id != :not_linked
           @app.call(env)
         end
       end
