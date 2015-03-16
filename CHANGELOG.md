@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 0.7.0 (unreleased)
+
+* ...
+
 ## 0.6.0 (released 2015-03-16)
 
 * add missing translation for `vagrant status` ([#35](https://github.com/tknerr/vagrant-managed-servers/issues/35), thanks @warrenseine for reporting!)
