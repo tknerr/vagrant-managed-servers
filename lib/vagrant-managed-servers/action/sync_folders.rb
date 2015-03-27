@@ -62,6 +62,10 @@ module VagrantPlugins
                                 :hostpath => hostpath,
                                 :guestpath => guestpath))
 
+            # Escape backlashes in case the user is trying to authenticate using
+            # Active Directory domain credentials (e.g. "domain\username")
+            ssh_info.gsub!("\\", "\\\\\\\\")
+
             # Create the guest path
             env[:machine].communicate.sudo("mkdir -p '#{guestpath}'")
             env[:machine].communicate.sudo(
