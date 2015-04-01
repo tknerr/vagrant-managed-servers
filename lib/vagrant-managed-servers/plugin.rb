@@ -6,8 +6,8 @@ end
 
 # This is a sanity check to make sure no one is attempting to install
 # this into an early Vagrant version.
-if Vagrant::VERSION < "1.2.0"
-  raise "The Vagrant ManagedServers plugin is only compatible with Vagrant 1.2+"
+if Vagrant::VERSION < "1.6.0"
+  raise "The Vagrant ManagedServers plugin is only compatible with Vagrant 1.6+"
 end
 
 module VagrantPlugins
