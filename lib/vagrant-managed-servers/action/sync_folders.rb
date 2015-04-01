@@ -62,14 +62,10 @@ module VagrantPlugins
                                 :hostpath => hostpath,
                                 :guestpath => guestpath))
 
-            # Escape backlashes in case the user is trying to authenticate using
-            # Active Directory domain credentials (e.g. "domain\username")
-            ssh_info[:username].gsub!("\\", "\\\\\\\\")
-
             # Create the guest path
             env[:machine].communicate.sudo("mkdir -p '#{guestpath}'")
             env[:machine].communicate.sudo(
-              "chown -R #{ssh_info[:username]} '#{guestpath}'")
+              "chown -R '#{ssh_info[:username]}' '#{guestpath}'")
 
             # Rsync over to the guest path using the SSH info
             ssh_key_options = Array(ssh_info[:private_key_path]).map { |path| "-i '#{path}' " }.join
@@ -77,9 +73,9 @@ module VagrantPlugins
             command = [
               "rsync", "--verbose", "--archive", "-z",
               "--exclude", ".vagrant/", "--exclude", "Vagrantfile",
-              "-e", "ssh -p #{ssh_info[:port]} -o StrictHostKeyChecking=no #{ssh_key_options} #{ssh_proxy_commands}",
+              "-e", "ssh -l '#{ssh_info[:username]}' -p #{ssh_info[:port]} -o StrictHostKeyChecking=no #{ssh_key_options} #{ssh_proxy_commands}",
               hostpath,
-              "#{ssh_info[:username]}@#{ssh_info[:host]}:#{guestpath}"]
+              "#{ssh_info[:host]}:#{guestpath}"]
 
             # we need to fix permissions when using rsync.exe on windows, see
             # http://stackoverflow.com/questions/5798807/rsync-permission-denied-created-directories-have-no-permissions
