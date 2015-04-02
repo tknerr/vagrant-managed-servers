@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 0.7.0 (unreleased)
+
+* ...
+
 ## 0.6.1 (released 2015-04-02)
 
 * quote ssh usernames to support active directory style `domain/user` logins ([#38](https://github.com/tknerr/vagrant-managed-servers/issues/38), thanks @chrisbaldauf!)
