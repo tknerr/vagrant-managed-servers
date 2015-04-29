@@ -39,7 +39,12 @@ module VagrantPlugins
                                   :hostpath => hostpath,
                                   :guestpath => guestpath))
               env[:machine].communicate.tap do |comm|
-                comm.upload(hostpath, guestpath)
+                # When syncing many files, we've see SEC_E_INVALID_TOKEN errors
+                # that appear to be transient (try again and it goes away). Let's
+                # retry a few times to add some robustness.
+                retryable(tries: 3, sleep: 1) do
+                  comm.upload(hostpath, guestpath)
+                end
               end
               return
             end
