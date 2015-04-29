@@ -13,6 +13,7 @@ module VagrantPlugins
       # AWS instance.
       class SyncFolders
         include Vagrant::Util::ScopedHashOverride
+        include Vagrant::Util::Retryable
 
         def initialize(app, env)
           @app    = app
