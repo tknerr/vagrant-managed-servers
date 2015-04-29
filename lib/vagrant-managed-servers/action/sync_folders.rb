@@ -46,7 +46,7 @@ module VagrantPlugins
                   comm.upload(hostpath, guestpath)
                 end
               end
-              return
+              next
             end
 
             unless Vagrant::Util::Which.which('rsync')
