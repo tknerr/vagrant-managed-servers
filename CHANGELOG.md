@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 0.7.0 (unreleased)
+
+* ...
+
 ## 0.6.2 (released 2015-04-30)
 
 * fix bug where WinRM file sync fails occasionally (retry 3 times) ([#43](https://github.com/tknerr/vagrant-managed-servers/issues/43), thanks @chrisbaldauf!)
