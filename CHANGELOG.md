@@ -3,7 +3,9 @@
 
 ## 0.7.0 (unreleased)
 
-* ...
+* Change folder synchronization mechanism for Windows guests from the naive WinRM
+uploader, which is quite slow, to the built-in Vagrant SMB folder sync. No change
+to non-windows folder sync.([#46](https://github.com/tknerr/vagrant-managed-servers/issues/46))
 
 ## 0.6.1 (released 2015-04-02)
 
