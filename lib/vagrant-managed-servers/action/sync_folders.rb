@@ -34,22 +34,6 @@ module VagrantPlugins
             hostpath  = File.expand_path(data[:hostpath], env[:root_path])
             guestpath = data[:guestpath]
 
-            # Windows doesn't support ssh or rsync natively. Use winrm instead
-            if (env[:machine].config.vm.communicator == :winrm) then
-              env[:ui].info(I18n.t('vagrant_managed_servers.winrm_upload',
-                                  :hostpath => hostpath,
-                                  :guestpath => guestpath))
-              env[:machine].communicate.tap do |comm|
-                # When syncing many files, we've see SEC_E_INVALID_TOKEN errors
-                # that appear to be transient (try again and it goes away). Let's
-                # retry a few times to add some robustness.
-                retryable(tries: 3, sleep: 1) do
-                  comm.upload(hostpath, guestpath)
-                end
-              end
-              next
-            end
-
             unless Vagrant::Util::Which.which('rsync')
               env[:ui].warn(I18n.t('vagrant_managed_servers.rsync_not_found_warning'))
               break
