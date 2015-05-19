@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
     ms_config.omnibus.chef_version = "12.0.3"
     ms_config.berkshelf.enabled = true
-  
+
     ms_config.vm.provider :managed do |managed_config, override|
       managed_config.server = "192.168.40.35"
       override.ssh.username = "vagrant"
@@ -32,6 +32,35 @@ Vagrant.configure("2") do |config|
       chef.cookbooks_path = [ './cookbooks' ]
       chef.add_recipe "apt"
       chef.add_recipe "apache2"
+    end
+  end
+
+
+
+  #
+  # fake a managed windows server by bringing up a virtualbox vm
+  #
+  config.vm.define :fake_managed_windows_server do |fms_config|
+    fms_config.vm.box = "boxcutter/eval-win7x86-enterprise"
+    fms_config.vm.network :private_network, ip: "192.168.40.36"
+    fms_config.berkshelf.enabled = false
+  end
+
+  #
+  # configure managed provider to connect to `fake_managed_windows_server`
+  #
+  config.vm.define :my_windows_server do |ms_config|
+
+    ms_config.vm.box = "tknerr/managed-server-dummy"
+
+    ms_config.berkshelf.enabled = false
+
+    ms_config.vm.communicator = :winrm
+    ms_config.winrm.username = 'vagrant'
+    ms_config.winrm.password = 'vagrant'
+
+    ms_config.vm.provider :managed do |managed, override|
+      managed.server = '192.168.40.36'
     end
   end
 
