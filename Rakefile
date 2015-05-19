@@ -13,7 +13,7 @@ task :default => "spec"
 
 desc "runs the acceptance \"test\" as described in README"
 task :acceptance do
-  ['linux', 'windows'],each do |os|
+  ['linux', 'windows'].each do |os|
     begin
       sh "vagrant up fake_managed_server"
       sh "vagrant up my_server --provider=managed"
