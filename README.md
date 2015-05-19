@@ -190,20 +190,20 @@ If those pass, you're ready to start developing the plugin. You can test
 the plugin without installing it into your Vagrant environment by using the
 `Vagrantfile` in the top level of this directory and use bundler to execute Vagrant.
 
-First, fake a managed server by bringing up the `fake_managed_server` vagrant VM with the default virtualbox provider:
+First, fake a managed server by bringing up the `fake_managed_linux_server` vagrant VM with the default virtualbox provider:
 
 ```
-$ bundle exec vagrant up fake_managed_server
+$ bundle exec vagrant up fake_managed_linux_server
 ```
 
-Now you can use the managed provider (defined in a separate VM named `my_server`) to ssh into or provision the (fake) managed server:
+Now you can use the managed provider (defined in a separate VM named `my_linux_server`) to ssh into or provision the (fake) managed server:
 
 ```
 $ # link vagrant with the server
-$ bundle exec vagrant up my_server --provider=managed
+$ bundle exec vagrant up my_linux_server --provider=managed
 $ # ssh / provision
-$ bundle exec vagrant ssh my_server
-$ bundle exec vagrant provision my_server
+$ bundle exec vagrant ssh my_linux_server
+$ bundle exec vagrant provision my_linux_server
 $ # unlink
-$ bundle exec vagrant destroy my_server
+$ bundle exec vagrant destroy my_linux_server
 ```
