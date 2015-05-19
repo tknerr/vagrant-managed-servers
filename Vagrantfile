@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
     ms_config.omnibus.chef_version = "12.0.3"
     ms_config.berkshelf.enabled = true
-  
+
     ms_config.vm.provider :managed do |managed_config, override|
       managed_config.server = "192.168.40.35"
       override.ssh.username = "vagrant"

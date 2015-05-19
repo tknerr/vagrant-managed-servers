@@ -26,21 +26,6 @@ module VagrantPlugins
 
             b2.use LinkServer
           end
-=begin
-          b.use HandleBoxUrl
-          b.use ConfigValidate
-          b.use Call, IsReachable do |env, b2|
-            if env[:result]
-              b2.use !MessageNotReachable
-              next
-            end
-
-            b2.use Provision
-            b2.use SyncFolders
-            b2.use WarnNetworks
-            b2.use LinkServer
-          end
-=end
         end
       end
 
@@ -77,7 +62,15 @@ module VagrantPlugins
               end
 
               b3.use Provision
-              b3.use SyncFolders
+              if env[:machine].config.vm.communicator == :winrm
+                # Use the builtin vagrant folder sync for Windows target servers.
+                # This gives us SMB folder sharing, which is much faster than the
+                # WinRM uploader for any non-trivial number of files.
+                b3.use Vagrant::Action::Builtin::SyncedFolders
+              else
+                # Vagrant managed servers custom implementation
+                b3.use SyncFolders
+              end
             end
           end
         end
