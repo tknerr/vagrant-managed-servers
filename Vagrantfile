@@ -10,6 +10,7 @@ Vagrant.configure("2") do |config|
     ll_config.vm.box = "chef/ubuntu-12.04-i386"
     ll_config.vm.network :private_network, ip: "192.168.40.35"
     ll_config.berkshelf.enabled = false
+    ll_config.vm.synced_folder ".", "/vagrant", disabled: true
   end
 
   #
@@ -44,6 +45,7 @@ Vagrant.configure("2") do |config|
     lw_config.vm.box = "boxcutter/eval-win7x86-enterprise"
     lw_config.vm.network :private_network, ip: "192.168.40.36"
     lw_config.berkshelf.enabled = false
+    lw_config.vm.synced_folder ".", "/vagrant", disabled: true
   end
 
   #
