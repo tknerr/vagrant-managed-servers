@@ -12,5 +12,5 @@ end
 group :plugins do
   gem "vagrant-managed-servers", path: "."
   gem "vagrant-omnibus", "1.4.1"
-  gem "vagrant-berkshelf", "3.0.1"
+  gem "vagrant-berkshelf", "4.0.4"
 end
