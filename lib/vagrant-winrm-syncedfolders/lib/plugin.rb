@@ -11,7 +11,7 @@ module VagrantPlugins
       mechanism, most notably that file tranfer is slow for large numbers of files.
       EOF
 
-      synced_folder("wirnm", 6) do
+      synced_folder("winrm", 6) do
         require_relative "synced_folder"
         init!
         SyncedFolder
