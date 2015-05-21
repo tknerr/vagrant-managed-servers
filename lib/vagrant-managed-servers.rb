@@ -1,7 +1,6 @@
 require "pathname"
 
 require "vagrant-managed-servers/plugin"
-require "vagrant-winrm-syncedfolders/lib/plugin"
 
 module VagrantPlugins
   module ManagedServers
