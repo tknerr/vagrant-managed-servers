@@ -163,12 +163,18 @@ config.vm.define 'my-windows-server' do |windows|
   end
 end
 ```
-Synchronization of files using WinRM is known to be slow, so it is recommended
-that you disable synched folders that aren't critical. For instance, to disable the
-default /vagrant share, you could use the following code:
+
+### Synced folders
+Vagrant Managed Servers will try several different mechanisms to sync folders for Windows guests. In order of priority:
+
+1. [SMB](http://docs.vagrantup.com/v2/synced-folders/smb.html) - requires running from an Administrative console and Powershell 3 or greater. Note that there is a known [bug](https://github.com/mitchellh/vagrant/issues/3139) which causes the Powershell version check to hang for Powershell 2
+2. [WinRM](https://github.com/cimpress-mcp/vagrant-winrm-syncedfolders) - uses the WinRM communicator and is reliable, but can be slow for large numbers of files. 
+3. [RSync](http://docs.vagrantup.com/v2/synced-folders/rsync.html) - requires `rsync.exe` installed and on your path.
+
+Vagrant will try to use the best folder synchronization mechanism given your host and guest capabilities, but you can force a different type of folder sync with the `type` parameter of the `synced_folder` property in your Vagrantfile.
 
 ```ruby
-windows.vm.synced_folder '.', '/vagrant', disabled: true
+windows.vm.synced_folder '.', '/vagrant', type: "winrm"
 ```
 
 ## Development
