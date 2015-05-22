@@ -1,9 +1,13 @@
 
 # Changelog
 
+## 0.8.0 (unreleased)
+
+* ...
+
 ## 0.7.1 (released 2015-05-22)
 
-* fix bug where the vagrant-winrm-syncedfolders plugin dependency is not properly loaded (see [#49](https://github.com/tknerr/vagrant-managed-servers/issues/49), thanks @chrisbaldauf for the fix!) 
+* fix bug where the vagrant-winrm-syncedfolders plugin dependency is not properly loaded (see [#49](https://github.com/tknerr/vagrant-managed-servers/issues/49), thanks @chrisbaldauf for the fix!)
 
 ## 0.7.0 (released 2015-05-22)
 
