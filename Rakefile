@@ -13,12 +13,15 @@ task :default => "spec"
 
 desc "runs the acceptance \"test\" as described in README"
 task :acceptance do
-  begin
-    sh "vagrant up fake_managed_server"
-    sh "vagrant up my_server --provider=managed"
-    sh "vagrant provision my_server"
-    sh "vagrant reload my_server"
-  ensure
-    sh "vagrant destroy -f"
+  ['linux', 'windows'].each do |os|
+    begin
+      sh "vagrant up local_#{os}"
+      sh "vagrant up managed_#{os} --provider=managed"
+      sh "vagrant provision managed_#{os}"
+      sh "vagrant reload managed_#{os}"
+    ensure
+      sh "vagrant destroy -f managed_#{os}"
+      sh "vagrant destroy -f local_#{os}"
+    end
   end
 end
