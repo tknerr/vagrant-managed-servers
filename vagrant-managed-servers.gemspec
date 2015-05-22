@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project         = "vagrant-managed-servers"
 
-  s.add_runtime_dependency "vagrant-winrm-syncedfolders"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec-core", "~> 2.14.7"
   s.add_development_dependency "rspec-expectations", "~> 2.14.5"
