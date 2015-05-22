@@ -164,7 +164,7 @@ end
 ```
 
 ### Synced Folders (Windows)
-Vagrant Managed Servers will try several different mechanisms to sync folders for Windows guests. In order of priority:
+It is recommended that you install the `vagrant-winrm-syncedfolders` plugin for communicating with Windows guests (`vagrant plugin install vagrant-winrm-syncedfolders`). Once installed, Vagrant Managed Servers will try several different mechanisms to sync folders for Windows guests. In order of priority:
 
 1. [SMB](http://docs.vagrantup.com/v2/synced-folders/smb.html) - requires running from a Windows host, an Administrative console, and Powershell 3 or greater. Note that there is a known [bug](https://github.com/mitchellh/vagrant/issues/3139) which causes the Powershell version check to hang for Powershell 2
 2. [WinRM](https://github.com/cimpress-mcp/vagrant-winrm-syncedfolders) - uses the WinRM communicator and is reliable, but can be slow for large numbers of files.

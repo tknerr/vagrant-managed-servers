@@ -3,6 +3,10 @@ en:
     warn_networks: |-
       Warning! The ManagedServers provider doesn't support any of the Vagrant
       high-level network configurations (`config.vm.network`). They will be ignored.
+    warn_winrm_syncedfolders: |-
+      Warning! The vagrant-winrm-syncedfolders plugin was not found and
+      is recommended for Windows guests. Install it with
+      `vagrant plugin install vagrant-winrm-syncedfolders`.
     rsync_not_found_warning: |-
       Warning! Folder sync disabled because the rsync binary is missing.
       Make sure rsync is installed and the binary can be found in the PATH.
