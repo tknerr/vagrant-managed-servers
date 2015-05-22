@@ -134,7 +134,8 @@ specified, Vagrant will emit a warning and just ignore it.
 ## Synced Folders
 
 There is minimal synced folders support for provisioning linux guests
-via rsync, and for windows guests via either smb, winrm or rsync (see below).
+via rsync, and for windows guests via either smb, winrm or rsync
+([see below](https://github.com/tknerr/vagrant-managed-servers#synced-folders-windows)).
 
 This is good enough for all built-in Vagrant provisioners (shell,
 chef, and puppet) to work!
