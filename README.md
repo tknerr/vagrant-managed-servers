@@ -19,7 +19,7 @@ Credits: this provider was initially based on the [vagrant-aws](https://github.c
 * SSH into managed servers.
 * Provision managed servers with any built-in Vagrant provisioner.
 * Reboot a managed server.
-* Minimal synced folder support via `rsync`.
+* Synced folder support.
 
 ## Usage
 
@@ -133,10 +133,8 @@ specified, Vagrant will emit a warning and just ignore it.
 
 ## Synced Folders
 
-There is minimal support for synced folders. Upon `vagrant provision`,
-the managed servers provider will use
-`rsync` (if available) to uni-directionally sync the folder to
-the remote machine over SSH.
+There is minimal synced folders support for provisioning linux guests
+via rsync, and for windows guests via either smb, winrm or rsync (see below).
 
 This is good enough for all built-in Vagrant provisioners (shell,
 chef, and puppet) to work!
@@ -164,11 +162,11 @@ config.vm.define 'my-windows-server' do |windows|
 end
 ```
 
-### Synced folders
+### Synced Folders (Windows)
 Vagrant Managed Servers will try several different mechanisms to sync folders for Windows guests. In order of priority:
 
 1. [SMB](http://docs.vagrantup.com/v2/synced-folders/smb.html) - requires running from a Windows host, an Administrative console, and Powershell 3 or greater. Note that there is a known [bug](https://github.com/mitchellh/vagrant/issues/3139) which causes the Powershell version check to hang for Powershell 2
-2. [WinRM](https://github.com/cimpress-mcp/vagrant-winrm-syncedfolders) - uses the WinRM communicator and is reliable, but can be slow for large numbers of files. 
+2. [WinRM](https://github.com/cimpress-mcp/vagrant-winrm-syncedfolders) - uses the WinRM communicator and is reliable, but can be slow for large numbers of files.
 3. [RSync](http://docs.vagrantup.com/v2/synced-folders/rsync.html) - requires `rsync.exe` installed and on your path.
 
 Vagrant will try to use the best folder synchronization mechanism given your host and guest capabilities, but you can force a different type of folder sync with the `type` parameter of the `synced_folder` property in your Vagrantfile.
