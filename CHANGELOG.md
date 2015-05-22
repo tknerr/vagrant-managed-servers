@@ -3,9 +3,9 @@
 
 ## 0.7.0 (unreleased)
 
-* Change folder synchronization mechanism for Windows guests from the naive WinRM
-uploader, which is quite slow, to the built-in Vagrant SMB folder sync. No change
-to non-windows folder sync.([#46](https://github.com/tknerr/vagrant-managed-servers/issues/46))
+* extract the WinRM synced folder mechanism into [a separate plugin](https://github.com/Cimpress-MCP/vagrant-winrm-syncedfolders) (see [#47](https://github.com/tknerr/vagrant-managed-servers/pull/47), thanks @chrisbaldauf!)
+* use the `Vagrant::Action::Builtin::SyncedFolders` for provisioning windows guests. This will use (the much faster) SMB synced folders if possible (see README), otherwise fall back to the WinRM implementation above (see [#46](https://github.com/tknerr/vagrant-managed-servers/issues/46), thanks @chrisbaldauf!)
+* clean up the example Vagrantfile and add windows examples [#48](https://github.com/tknerr/vagrant-managed-servers/pull/48)
 
 ## 0.6.2 (released 2015-04-30)
 
