@@ -1,6 +1,10 @@
 
 # Changelog
 
+## 0.8.0 (unreleased)
+
+* ...
+
 ## 0.7.0 (released 2015-05-22)
 
 * extract the WinRM synced folder mechanism into [a separate plugin](https://github.com/Cimpress-MCP/vagrant-winrm-syncedfolders) (see [#47](https://github.com/tknerr/vagrant-managed-servers/pull/47), thanks @chrisbaldauf!)
