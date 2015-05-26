@@ -12,8 +12,6 @@ Since you don't control the lifecycle:
 
 Credits: this provider was initially based on the [vagrant-aws](https://github.com/mitchellh/vagrant-aws) provider with the AWS-specific functionality stripped out.
 
-**NOTE:** This plugin requires Vagrant 1.2+
-
 ## Features
 
 * SSH into managed servers.
@@ -90,19 +88,10 @@ If you try any of the other VM lifecycle commands like `halt`, `suspend`, `resum
 
 Every provider in Vagrant must introduce a custom box format. This provider introduces a "dummy box" for the `managed` provider which is really nothing more than the required `metadata.json` with the provider name set to "managed".
 
-For Vagrant 1.5+ you can use the [tknerr/managed-server-dummy](https://vagrantcloud.com/tknerr/managed-server-dummy) vagrantcloud box:
+You can use the [tknerr/managed-server-dummy](https://atlas.hashicorp.com/tknerr/boxes/managed-server-dummy) box like that:
 ```ruby
 Vagrant.configure("2") do |config|
   config.vm.box = "tknerr/managed-server-dummy"
-  ...
-end
-```
-
-For Vagrant < 1.5 you can point to the [dummy.box](https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box) URL directly:
-```ruby
-Vagrant.configure("2") do |config|
-  config.vm.box = "managed-server-dummy"
-  config.vm.box_url = "https://github.com/tknerr/vagrant-managed-servers/raw/master/dummy.box"
   ...
 end
 ```
@@ -120,7 +109,7 @@ Vagrant.configure("2") do |config|
   # ... other stuff
 
   config.vm.provider :managed do |managed|
-    managed.server = "some-server.org"
+    managed.server = "myserver.mydomain.com"
   end
 end
 ```
