@@ -33,6 +33,11 @@ module VagrantPlugins
         Provider
       end
 
+      provider_capability(:managed, :public_address) do
+        require_relative 'cap'
+        Cap
+      end
+
       # This initializes the internationalization strings.
       def self.setup_i18n
         I18n.load_path << File.expand_path("locales/en.yml", ManagedServers.source_root)
