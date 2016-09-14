@@ -3,7 +3,8 @@
 
 ## 0.8.0 (unreleased)
 
-* ...
+* add Vagrant 1.8.5 compatibility and fix TravisCI build (see [#64](https://github.com/tknerr/vagrant-managed-servers/pull/64))
+* decouple from [vagrant-winrm-syncedfolders](https://github.com/Cimpress-MCP/vagrant-winrm-syncedfolders), which now needs to be installed separately (see [#65](https://github.com/tknerr/vagrant-managed-servers/pull/65), which reverts [#51](https://github.com/tknerr/vagrant-managed-servers/pull/51) and applies [#50](https://github.com/tknerr/vagrant-managed-servers/pull/50). thanks @chrisbaldauf!) 
 
 ## 0.7.1 (released 2015-05-22)
 
