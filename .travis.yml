@@ -1,5 +1,11 @@
 language: ruby
+
 rvm:
-  - 2.0.0
+  - 2.2.5
+
+before_install:
+  - rvm @global do gem uninstall bundler --executables
+  - gem install bundler --version '1.12.5'
+
 script:
   - bundle exec rake spec
