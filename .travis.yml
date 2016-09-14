@@ -1,7 +1,7 @@
 language: ruby
 
 rvm:
-  - 2.2.3
+  - 2.2.5
 
 before_install:
   - rvm @global do gem uninstall bundler --executables
