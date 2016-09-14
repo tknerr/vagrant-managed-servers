@@ -61,7 +61,7 @@ module VagrantPlugins
             ssh_key_options = Array(ssh_info[:private_key_path]).map { |path| "-i '#{path}' " }.join
             ssh_proxy_commands = Array(ssh_info[:proxy_command]).map { |command| "-o ProxyCommand='#{command}' "}.join
             command = [
-              "rsync", "--verbose", "--archive", "-z",
+              "rsync", "--verbose", "--archive", "--del", "-z",
               "--exclude", ".vagrant/", "--exclude", "Vagrantfile",
               "-e", "ssh -l '#{ssh_info[:username]}' -p #{ssh_info[:port]} -o StrictHostKeyChecking=no #{ssh_key_options} #{ssh_proxy_commands}",
               hostpath,
