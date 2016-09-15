@@ -9,7 +9,6 @@ group :development do
   # gem dependency because we expect to be installed within the
   # Vagrant environment itself using `vagrant plugin`.
   gem "vagrant", git: "https://github.com/mitchellh/vagrant.git", ref: "v1.8.5"
-  gem 'vagrant-spec', git: 'git://github.com/mitchellh/vagrant-spec.git'
 end
 
 group :plugins do
