@@ -6,7 +6,7 @@ This is a [Vagrant](http://www.vagrantup.com) 1.6+ plugin that adds a provider f
 
 Since you don't control the lifecycle:
  * `up` and `destroy` are re-interpreted as "linking" / "unlinking" vagrant with a managed server
- * once "linked", the `ssh` and `provision` commands work as expected and `status` shows the managed server as either "running" or "not reachable"
+ * once "linked", the `ssh`, `provision` and `share` commands work as expected, and `status` shows the managed server as either "running" or "not reachable"
  * `reload` will issue a reboot command on the managed server (cross your fingers ;-))
  * `halt`, `suspend` and `resume` are no-ops in this provider
 
@@ -18,6 +18,7 @@ Credits: this provider was initially based on the [vagrant-aws](https://github.c
 * Provision managed servers with any built-in Vagrant provisioner.
 * Reboot a managed server.
 * Synced folder support.
+* Provide access to a managed server via Vagrant Share.
 
 ## Usage
 
