@@ -63,15 +63,8 @@ module VagrantPlugins
 
               b3.use Provision
               b3.use WarnWinRMSyncedFolders
-              if env[:machine].config.vm.communicator == :winrm
-                # Use the builtin vagrant folder sync for Windows target servers.
-                # This gives us SMB folder sharing, which is much faster than the
-                # WinRM uploader for any non-trivial number of files.
-                b3.use Vagrant::Action::Builtin::SyncedFolders
-              else
-                # Vagrant managed servers custom implementation
-                b3.use SyncFolders
-              end
+              b3.use Vagrant::Action::Builtin::SyncedFolderCleanup
+              b3.use Vagrant::Action::Builtin::SyncedFolders
             end
           end
         end
@@ -153,7 +146,6 @@ module VagrantPlugins
       autoload :MessageNotLinked, action_root.join("message_not_linked")
       autoload :MessageAlreadyLinked, action_root.join("message_already_linked")
       autoload :ReadState, action_root.join("read_state")
-      autoload :SyncFolders, action_root.join("sync_folders")
       autoload :WarnNetworks, action_root.join("warn_networks")
       autoload :LinkServer, action_root.join("link_server")
       autoload :UnlinkServer, action_root.join("unlink_server")
