@@ -1,6 +1,10 @@
 
 # CHANGELOG
 
+## 0.9.0 (unreleased)
+
+* ...
+
 ## 0.8.0 (released 2016-11-04)
 
 * add Vagrant 1.8.5 compatibility and fix TravisCI build (see [#64](https://github.com/tknerr/vagrant-managed-servers/pull/64))
