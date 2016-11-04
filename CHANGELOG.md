@@ -1,13 +1,16 @@
 
 # CHANGELOG
 
-## 0.8.0 (unreleased)
+## 0.8.0 (released 2016-11-04)
 
 * add Vagrant 1.8.5 compatibility and fix TravisCI build (see [#64](https://github.com/tknerr/vagrant-managed-servers/pull/64))
 * decouple from [vagrant-winrm-syncedfolders](https://github.com/Cimpress-MCP/vagrant-winrm-syncedfolders), which now needs to be installed separately (see [#65](https://github.com/tknerr/vagrant-managed-servers/pull/65), which reverts [#51](https://github.com/tknerr/vagrant-managed-servers/pull/51) and applies [#50](https://github.com/tknerr/vagrant-managed-servers/pull/50). thanks @chrisbaldauf!)
 * ensure rsync does not keep stale files by adding the `--del` option (see [#61](https://github.com/tknerr/vagrant-managed-servers/issues/61), thanks @stephencooke!)
 * add support for `vagrant share` command (see [#67](https://github.com/tknerr/vagrant-managed-servers/pull/67), thanks @nigelgbanks!)
-* using builtin SyncedFolder implementation, all rsync options supported, rsync + rsync-auto commands working now (but only after an initial provision)
+* using the vagrant builtin SyncedFolder implementation (see [#68](https://github.com/tknerr/vagrant-managed-servers/pull/68)), which also fixes:
+   * [#17](https://github.com/tknerr/vagrant-managed-servers/pull/17) Reuse Rsync Action from Vagrant Core
+   * [#24](https://github.com/tknerr/vagrant-managed-servers/pull/24) rsync__exclude does not work
+   * [#52](https://github.com/tknerr/vagrant-managed-servers/pull/52) vagrant rsync and vagrant rsync-auto not working
 
 ## 0.7.1 (released 2015-05-22)
 
