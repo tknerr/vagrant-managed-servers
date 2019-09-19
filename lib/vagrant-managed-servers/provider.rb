@@ -1,5 +1,6 @@
 require "log4r"
 require "vagrant"
+require "uri"
 
 module VagrantPlugins
   module ManagedServers
@@ -19,9 +20,10 @@ module VagrantPlugins
 
       # Returns the SSH info for accessing the managed server.
       def ssh_info
+        uri = URI("ssh://#{@machine.provider_config.server}")
         return {
-          :host => @machine.provider_config.server,
-          :port => 22
+          :host => uri.hostname,
+          :port => uri.port || 22
         }
       end
 
