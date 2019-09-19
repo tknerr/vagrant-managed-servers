@@ -3,7 +3,7 @@
 
 ## 0.9.0 (unreleased)
 
-* ...
+* add support for specifying custom SSH port of a managed server
 
 ## 0.8.0 (released 2016-11-04)
 
